@@ -1,4 +1,3 @@
-
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
@@ -29,7 +28,6 @@ const initialState: TasksState = {
   error: null,
 };
 
-// Function to fetch weather data for a task
 export const fetchWeatherForTask = createAsyncThunk(
   'tasks/fetchWeather',
   async (taskId: string, { getState, rejectWithValue }) => {
@@ -41,12 +39,10 @@ export const fetchWeatherForTask = createAsyncThunk(
         return rejectWithValue('Task not found');
       }
       
-      // Simulate an API call to a weather service
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      // Return mock weather data (in a real app, this would be from an API)
       const weather = {
-        temp: Math.floor(Math.random() * 30) + 5, // Random temperature between 5-35°C
+        temp: Math.floor(Math.random() * 30) + 5,
         condition: ['Sunny', 'Cloudy', 'Rainy', 'Windy'][Math.floor(Math.random() * 4)],
         icon: ['sun', 'cloud', 'cloud-rain', 'wind'][Math.floor(Math.random() * 4)],
       };
@@ -88,6 +84,12 @@ const tasksSlice = createSlice({
         task.priority = action.payload.priority;
       }
     },
+    editTask: (state, action: PayloadAction<{ id: string; text: string }>) => {
+      const task = state.items.find(task => task.id === action.payload.id);
+      if (task) {
+        task.text = action.payload.text;
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -109,5 +111,5 @@ const tasksSlice = createSlice({
   },
 });
 
-export const { addTask, deleteTask, toggleComplete, updatePriority } = tasksSlice.actions;
+export const { addTask, deleteTask, toggleComplete, updatePriority, editTask } = tasksSlice.actions;
 export default tasksSlice.reducer;
