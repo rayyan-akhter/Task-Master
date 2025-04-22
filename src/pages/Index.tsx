@@ -33,7 +33,7 @@ const Index = () => {
       </main>
       <footer className="bg-white border-t py-6">
         <div className="container mx-auto px-4 text-center text-gray-600 text-sm">
-          <p>TaskMaster Powered To-Do App &copy; 2025</p>
+          <p>TaskMaster To-Do App &copy; 2025</p>
         </div>
       </footer>
     </div>
