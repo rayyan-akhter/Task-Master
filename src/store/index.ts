@@ -1,16 +1,19 @@
 
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import authReducer from './slices/authSlice';
 import tasksReducer from './slices/tasksSlice';
 import { loadState, saveState } from './localStorage';
 
 const persistedState = loadState();
 
+// Create the root reducer separately
+const rootReducer = combineReducers({
+  auth: authReducer,
+  tasks: tasksReducer,
+});
+
 export const store = configureStore({
-  reducer: {
-    auth: authReducer,
-    tasks: tasksReducer,
-  },
+  reducer: rootReducer,
   preloadedState: persistedState,
 });
 
