@@ -22,3 +22,7 @@ This project is built with:
 - React
 - shadcn-ui
 - Tailwind CSS
+
+## Deployed URL
+
+https://task-operator.netlify.app/
